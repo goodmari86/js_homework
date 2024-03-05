@@ -1,4 +1,4 @@
-var age = Number(prompt('Ваш вік', '18'));
+/*var age = Number(prompt('Ваш вік', '18'));
 var txt = 'років';
 if(typeof age === "number" && age > 0 && age <= 100){
     
@@ -20,5 +20,21 @@ if(typeof age === "number" && age > 0 && age <= 100){
     console.log(age+' '+txt);
 }else{
     console.log("Wrong input data");
+}*/
+
+var type = 'km';
+var value = 10;
+switch (type) {
+    case 'km':
+        console.log(value+' km = ' + (value*1000)+' meters');
+        break
+    case 'kg':
+        console.log(value+' kg = ' + (value*1000)+' gramms');
+        break;
+    case 'hour':
+        console.log(value+' hour = ' + (value*60)+ ' minutes');
+        break;
+    default:
+        console.log('Undefined type');
 }
 
