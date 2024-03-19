@@ -1,40 +1,41 @@
+function myIsNaN (data) {
+    if (data !== data) {
+       return true;
+    }
+   return false;
+   }
+   
+ console.log("Is NaN: " + myIsNaN(0/0)); 
 
-function drawTriangle(lineCount, symbol) {
+ function pad(string, symbol, symbolCount, toStart){
+    if(toStart){
+        return  string.padStart(symbolCount, symbol); 
+    }else{
+        return string.padEnd(symbolCount, symbol); 
+    }
+ }
+
+ console.log(pad("qwer","+",10, false)); 
+
+ function checkProbabilityTheory(count){
+    const min = 100;
+    const max = 1000;
+    let evenCount = 0;
+    let oddCount = 0;
+    for(let i=0;i<count; i++){
+      let randValue = Math.floor(Math.random() * (max - min + 1)) + min;
+      if(randValue % 2 === 0){
+        evenCount++;
+      }else{
+        oddCount++;
+      }
+    }
     
-    for (let i = 1; i <= lineCount; i++) {
-        let line = '';
-        for (let j = 1; j <= i; j++) {
-            line = line + symbol;
-        }
-        console.log(line);
-    }
-}
+    console.log("Кількість згенерованих чисел: " + count);
+    console.log("Парних чисел: " + evenCount);
+    console.log("Не парних чисел: " + oddCount);
+    console.log("Відсоток парних до не парних: " + Math.round((evenCount/count)*100) + "%" + Math.round((oddCount/count)*100));
+    return true;
+ }
+ checkProbabilityTheory(10);
 
-drawTriangle(10,'+');
-
-
-function calcSum(from, to) {
-    let i = from;
-    let result = 0;
-    while (i <= to) {
-        if(i % 3 === 0){
-            result = result + i;
-        }
-       i++;
-    }
-    console.log(result);
-}
-calcSum(1, 100);
-
-
-function pow(x, y) {
-    let i = 2;
-    let result = x;
-    while (i <= y) {
-       result = result * x;
-       i++;
-    }
-    console.log(result);
-}
-
-pow(2,3);
