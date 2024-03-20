@@ -1,41 +1,62 @@
-function myIsNaN (data) {
-    if (data !== data) {
-       return true;
+const car = {
+    mark: "Ford",
+    model: "Kuga",
+    color: "white",
+    getInfo: function (){
+        for (let key in car){
+            if(typeof car[key] !== "function"){
+                console.log(key + ': ' + car[key]);
+            }
+        }
     }
-   return false;
-   }
-   
- console.log("Is NaN: " + myIsNaN(0/0)); 
 
- function pad(string, symbol, symbolCount, toStart){
-    if(toStart){
-        return  string.padStart(symbolCount, symbol); 
-    }else{
-        return string.padEnd(symbolCount, symbol); 
+}
+
+car.getInfo();
+car.age = 15;
+car.getInfo();
+
+
+const services = {
+	"стрижка": 60,
+	"гоління": 80,
+	"Миття голови": 100,
+    price: function (){
+        let cost = 0;
+        for (let key in services){
+            if(typeof services[key] !== "function"){
+                cost += services[key];
+            }
+        }
+        console.log("загальну вартість послуг: " + cost);
+    },
+    minPrice: function (){
+        let minPrice = 999999999;
+        for (let key in services){
+            if(typeof services[key] !== "function"){
+                if(services[key] < minPrice) {
+                    minPrice = services[key];
+                }
+            }
+        }
+        console.log("мінімальний price: " + minPrice);
+    },
+    maxPrice: function (){
+        let maxPrice = 0;
+        for (let key in services){
+            if(typeof services[key] !== "function"){
+                if(services[key] > maxPrice) {
+                    maxPrice = services[key];
+                }
+            }
+        }
+        console.log("максимальний price: " + maxPrice);
     }
- }
+};
 
- console.log(pad("qwer","+",10, false)); 
-
- function checkProbabilityTheory(count){
-    const min = 100;
-    const max = 1000;
-    let evenCount = 0;
-    let oddCount = 0;
-    for(let i=0;i<count; i++){
-      let randValue = Math.floor(Math.random() * (max - min + 1)) + min;
-      if(randValue % 2 === 0){
-        evenCount++;
-      }else{
-        oddCount++;
-      }
-    }
-    
-    console.log("Кількість згенерованих чисел: " + count);
-    console.log("Парних чисел: " + evenCount);
-    console.log("Не парних чисел: " + oddCount);
-    console.log("Відсоток парних до не парних: " + Math.round((evenCount/count)*100) + "%" + Math.round((oddCount/count)*100));
-    return true;
- }
- checkProbabilityTheory(10);
+services.price();
+services['кава'] = 500;
+services.price();
+services.minPrice();
+services.maxPrice();
 
