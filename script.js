@@ -1,62 +1,90 @@
-const car = {
-    mark: "Ford",
-    model: "Kuga",
-    color: "white",
-    getInfo: function (){
-        for (let key in car){
-            if(typeof car[key] !== "function"){
-                console.log(key + ': ' + car[key]);
-            }
-        }
-    }
+
+function myBlend(arr){
+    return arr.sort(() => Math.random() - 0.5);
 
 }
-
-car.getInfo();
-car.age = 15;
-car.getInfo();
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]; 
+console.log(myBlend(arr));
 
 
-const services = {
-	"стрижка": 60,
-	"гоління": 80,
-	"Миття голови": 100,
-    price: function (){
-        let cost = 0;
-        for (let key in services){
-            if(typeof services[key] !== "function"){
-                cost += services[key];
-            }
-        }
-        console.log("загальну вартість послуг: " + cost);
-    },
-    minPrice: function (){
-        let minPrice = 999999999;
-        for (let key in services){
-            if(typeof services[key] !== "function"){
-                if(services[key] < minPrice) {
-                    minPrice = services[key];
+const company = {
+    name: 'Велика Компанія',
+    type:'Головна компанія',
+    platform: 'Платформа для продажу квитків',
+    sellsSolution: 'Рішення для продажу квитків',
+    clients: [
+        {
+            name: 'Клієнт 1',
+            type: 'subCompany',
+            uses: 'ПО для продажу квитків',
+            sells: 'Рішення для продажу квитків',
+            partners: [
+                {
+                    name: 'Клієнт 1.1',
+                    type: 'subSubCompany',
+                    uses: 'Рішення для продажу квитків',
+                    sells: 'Рішення для продажу квитків',
+                },
+                {
+                    name: 'Клієнт 2',
+                    type: 'subSubCompany',
+                    uses: 'Рішення для продажу квитків',
+                    sells: 'Рішення для продажу квитків',
+                    partners: [
+                        {
+                            name: 'Клієнт 2',
+                            type: 'subSubSubCompany',
+                            uses: 'Рішення для продажу квитків',
+                            sells: 'Рішення для продажу квитків',
+                        }
+                    ]
                 }
-            }
+            ]
+        },
+        {
+            name: 'Клієнт 2',
+            type: 'subCompany',
+            uses: 'ПО для продажу квитків',
+            sells: 'Рішення для продажу квитків'
         }
-        console.log("мінімальний price: " + minPrice);
-    },
-    maxPrice: function (){
-        let maxPrice = 0;
-        for (let key in services){
-            if(typeof services[key] !== "function"){
-                if(services[key] > maxPrice) {
-                    maxPrice = services[key];
-                }
-            }
-        }
-        console.log("максимальний price: " + maxPrice);
-    }
+    ]
 };
 
-services.price();
-services['кава'] = 500;
-services.price();
-services.minPrice();
-services.maxPrice();
 
+
+function findValueByKey(companyName){
+    let resultList = [];
+    company.clients.forEach((c) => {
+        if(c.name === companyName){
+           resultList.push({
+               name: c.name,
+               type: c.type,
+               uses: c.uses,
+               sells: c.sells}); 
+        }
+        if(c.partners){
+          findPartners(c.partners);
+        }
+    });
+
+    function findPartners(partners){
+        if(partners && Array.isArray(partners)){
+            partners.forEach((p) => {
+                if(p.name === companyName){
+                    resultList.push({
+                        name: p.name,
+                        type: p.type,
+                        uses: p.uses,
+                        sells: p.sells}); 
+                 }
+                 if(p.partners){
+                   findPartners(p.partners);
+                 }
+            })
+        }
+    }
+
+    return resultList;
+
+}
+console.log(findValueByKey("Клієнт 2"));
